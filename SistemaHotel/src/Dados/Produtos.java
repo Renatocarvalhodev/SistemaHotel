@@ -21,6 +21,9 @@ public class Produtos {
         this.descricao = descricao;
         this.unidade_medida = unidade_medida;
     }
+    
+    public Produtos() {
+    }
 
     public int getIdproduto() {
         return idproduto;

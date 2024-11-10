@@ -4,7 +4,7 @@
  */
 package Logica;
 
-import Dados.Quartos;
+import Dados.Produtos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,25 +24,22 @@ public class FProdutos {
     
     public DefaultTableModel mostrar(String buscar){
         DefaultTableModel modelo;
-        String[] titulos = {"ID", "Numero", "Andar", "Descrição", "Caracteristicas", "Preço", "Estado", "Tipo de Quarto"};
-        String[] registro =  new String[8];
+        String[] titulos = {"ID", "Produto", "Descrição", "Unidade Medida", "Preço Venda"};
+        String[] registro =  new String[5];
         totalRegistros = 0;
         
         modelo = new DefaultTableModel(null, titulos);
-        sSQL = "select * from tb_quartos where andar like '%" + buscar + "%' order by id_quartos";
+        sSQL = "select * from tb_produtos where nome like '%" + buscar + "%' order by id_produto";
         
         try{
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
             while (rs.next()){
-                registro [0] = rs.getString("id_quartos");
-                registro [1] = rs.getString("numero");
-                registro [2] = rs.getString("andar");
-                registro [3] = rs.getString("descricao");
-                registro [4] = rs.getString("caracteristicas");
-                registro [5] = rs.getString("preco_diaria");
-                registro [6] = rs.getString("estado");
-                registro [7] = rs.getString("tipo_quarto");
+                registro [0] = rs.getString("id_produto");
+                registro [1] = rs.getString("nome");
+                registro [2] = rs.getString("descricao");
+                registro [3] = rs.getString("unidade_medida");
+                registro [4] = rs.getString("preco_venda");
                 
                 totalRegistros += 1;
                 modelo.addRow(registro);
@@ -54,18 +51,15 @@ public class FProdutos {
         }
     }
     
-    public boolean inserir(Quartos dts){
-        sSQL = "insert into tb_quartos (numero, andar, descricao, caracteristicas, preco_diaria, estado, tipo_quarto)" + 
-                "values(?,?,?,?,?,?,?)";
+    public boolean inserir(Produtos dts){
+        sSQL = "insert into tb_produtos (nome, descricao, unidade_medida, preco_venda)" + 
+                "values(?,?,?,?)";
         try{
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, dts.getNumero());
-            pst.setString(2, dts.getAndar());
-            pst.setString(3, dts.getDescricao());
-            pst.setString(4, dts.getCaracteristicas());
-            pst.setDouble(5, dts.getValor_diaria());
-            pst.setString(6, dts.getEstado());
-            pst.setString(7, dts.getTipo_quarto());
+            pst.setString(1, dts.getNome());
+            pst.setString(2, dts.getDescricao());
+            pst.setString(3, dts.getUnidade_medida());
+            pst.setDouble(4, dts.getValor_produto());
             
             int n = pst.executeUpdate();
             if(n != 0){
@@ -80,21 +74,19 @@ public class FProdutos {
         }
     }
     
-    public boolean editar(Quartos dts){
+    public boolean editar(Produtos dts){
         
-        sSQL = "update tb_quartos set numero=?, andar=?, descricao=?, caracteristicas=?, preco_diaria=?, estado=?, tipo_quarto=?" +
-                "where id_quartos=?";
+        sSQL = "update tb_produtos set nome=?, descricao=?, unidade_medida=?, preco_venda=?" +
+                "where id_produto=?";
                 
         try{            
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, dts.getNumero());
-            pst.setString(2, dts.getAndar());
-            pst.setString(3, dts.getDescricao());
-            pst.setString(4, dts.getCaracteristicas());
-            pst.setDouble(5, dts.getValor_diaria());
-            pst.setString(6, dts.getEstado());
-            pst.setString(7, dts.getTipo_quarto());
-            pst.setInt(8, dts.getId_quartos());
+            pst.setString(1, dts.getNome());
+            pst.setString(2, dts.getDescricao());
+            pst.setString(3, dts.getUnidade_medida());
+            pst.setDouble(4, dts.getValor_produto());
+            pst.setInt(5, dts.getIdproduto());
+           
             
             int n = pst.executeUpdate();
             if(n != 0){
@@ -109,11 +101,11 @@ public class FProdutos {
         }
     }
     
-    public boolean deletar(Quartos dts){
-        sSQL = "delete from tb_quartos where id_quartos=?";
+    public boolean deletar(Produtos dts){
+        sSQL = "delete from tb_produtos where id_produto=?";
         try{
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setInt(1, dts.getId_quartos());        
+            pst.setInt(1, dts.getIdproduto());        
             int n = pst.executeUpdate();
             if(n != 0){
                 return true;
