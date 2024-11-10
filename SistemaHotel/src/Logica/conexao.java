@@ -27,7 +27,7 @@ public class conexao {
     public Connection conectar(){
         Connection link = null;
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             link = DriverManager.getConnection(this.url, this.user, this.pass);
         }
         catch(ClassNotFoundException | SQLException e) {

@@ -7,16 +7,16 @@ package Logica;
 import Dados.Quartos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import javax.swing.table.DefaultTableModel;
-import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author renat
  */
-public class fQuartos {
+public class FProdutos {
     private conexao mysql=new conexao();
     private Connection cn=mysql.conectar();
     private String sSQL="";

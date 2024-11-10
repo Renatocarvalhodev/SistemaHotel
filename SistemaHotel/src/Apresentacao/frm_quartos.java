@@ -21,6 +21,8 @@ public class frm_quartos extends javax.swing.JFrame {
     public frm_quartos() {
         initComponents();
         desativar();
+        mostrar("null");
+        this.setLocationRelativeTo(null);
         
     }
     
@@ -42,17 +44,17 @@ public class frm_quartos extends javax.swing.JFrame {
         CB_tipoQuarto.setVisible(false);
         
         btn_salvar.setEnabled(false);
-        btn_novo.setEnabled(false);
-        btn_cancelar.setEnabled(false);
+        btn_limpar.setEnabled(false);
         
         txt_id_quarto.setText("");
         txt_valorDiaria.setText("");
         txt_descricao.setText("");
-        txt_caracteristicas.setText("");        
+        txt_caracteristicas.setText(""); 
+        txt_numero.setText("");
     }
     
     void ativar(){
-        txt_id_quarto.setVisible(true);
+        txt_id_quarto.setVisible(false);
         CB_andar.setVisible(true);
         txt_numero.setVisible(true);
         txt_valorDiaria.setVisible(true);
@@ -63,12 +65,13 @@ public class frm_quartos extends javax.swing.JFrame {
         
         btn_salvar.setEnabled(true);
         btn_novo.setEnabled(true);
-        btn_cancelar.setEnabled(true);
+        btn_limpar.setEnabled(true);
         
         txt_id_quarto.setText("");
         txt_valorDiaria.setText("");
         txt_descricao.setText("");
         txt_caracteristicas.setText("");
+        txt_numero.setText("");
     }
     
     void mostrar (String buscar){
@@ -115,7 +118,7 @@ public class frm_quartos extends javax.swing.JFrame {
         CB_tipoQuarto = new javax.swing.JComboBox<>();
         btn_novo = new javax.swing.JButton();
         btn_salvar = new javax.swing.JButton();
-        btn_cancelar = new javax.swing.JButton();
+        btn_limpar = new javax.swing.JButton();
         txt_id_quarto = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -129,6 +132,7 @@ public class frm_quartos extends javax.swing.JFrame {
         lbl_registros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Quartos");
         setBackground(new java.awt.Color(204, 204, 204));
 
         jPanel1.setBackground(new java.awt.Color(224, 224, 224));
@@ -207,8 +211,13 @@ public class frm_quartos extends javax.swing.JFrame {
             }
         });
 
-        btn_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/imagens/icones/cancelar.png"))); // NOI18N
-        btn_cancelar.setText("Cancelar");
+        btn_limpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Files/imagens/icones/cancelar.png"))); // NOI18N
+        btn_limpar.setText("Limpar");
+        btn_limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limparActionPerformed(evt);
+            }
+        });
 
         txt_id_quarto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,7 +272,7 @@ public class frm_quartos extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(btn_cancelar)
+                                .addComponent(btn_limpar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(25, 25, 25))
         );
@@ -313,7 +322,7 @@ public class frm_quartos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_novo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_limpar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71))
         );
 
@@ -399,7 +408,7 @@ public class frm_quartos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_registros)
-                .addGap(130, 130, 130))
+                .addGap(64, 64, 64))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,9 +425,9 @@ public class frm_quartos extends javax.swing.JFrame {
                         .addComponent(btn_sair)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_registros)
-                .addGap(21, 21, 21))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -465,29 +474,30 @@ public class frm_quartos extends javax.swing.JFrame {
         ativar();
         btn_salvar.setText("Salvar");
         acao="salvar";
+        btn_novo.enable(false);
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
         if (txt_numero.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Insira o número do quarto.");
+            JOptionPane.showMessageDialog(rootPane, "Insira o número do quarto.");
             txt_numero.requestFocus();
             return;
         }
         
         if (txt_descricao.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Insira uma descrição para o quarto.");
+            JOptionPane.showMessageDialog(rootPane, "Insira uma descrição para o quarto.");
             txt_descricao.requestFocus();
             return;
         }
         
         if (txt_caracteristicas.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Insira uma característica para o quarto.");
+            JOptionPane.showMessageDialog(rootPane, "Insira uma característica para o quarto.");
             txt_caracteristicas.requestFocus();
             return;
         }
         
         if (txt_valorDiaria.getText().length() == 0){
-            JOptionPane.showConfirmDialog(rootPane, "Insira o valor da diária.");
+            JOptionPane.showMessageDialog(rootPane, "Insira o valor da diária.");
             txt_valorDiaria.requestFocus();
             return;
         }
@@ -509,18 +519,18 @@ public class frm_quartos extends javax.swing.JFrame {
         selecionado = CB_tipoQuarto.getSelectedIndex();
         dts.setTipo_quarto((String) CB_tipoQuarto.getItemAt(selecionado));
         
-        if(acao.equals("Salvar")){
+        if(acao.equals("salvar")){
             if(func.inserir(dts)){
-                JOptionPane.showConfirmDialog(rootPane, "O quarto foi registrado com sucesso");
+                JOptionPane.showMessageDialog(rootPane, "O quarto foi registrado com sucesso");
                 mostrar("");
                 desativar();
             }
-        } else if (acao.equals("Editar")){
+        } else if (acao.equals("editar")){
             dts.setId_quartos(Integer.parseInt(txt_id_quarto.getText()));
         }
         
         if(func.editar(dts)){
-                JOptionPane.showConfirmDialog(rootPane, "O quarto foi editado com sucesso");
+                JOptionPane.showMessageDialog(rootPane, "O quarto foi editado com sucesso");
                 mostrar("");
                 desativar();
         }
@@ -579,6 +589,17 @@ public class frm_quartos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_sairActionPerformed
 
+    private void btn_limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limparActionPerformed
+        limpar();
+    }//GEN-LAST:event_btn_limparActionPerformed
+
+    void limpar(){
+        txt_id_quarto.setText("");
+        txt_valorDiaria.setText("");
+        txt_descricao.setText("");
+        txt_caracteristicas.setText(""); 
+        txt_numero.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -621,7 +642,7 @@ public class frm_quartos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CB_tipoQuarto;
     private javax.swing.JButton btn_apagar;
     private javax.swing.JButton btn_buscar;
-    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_limpar;
     private javax.swing.JButton btn_novo;
     private javax.swing.JButton btn_sair;
     private javax.swing.JButton btn_salvar;
