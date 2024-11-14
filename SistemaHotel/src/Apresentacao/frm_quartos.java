@@ -474,7 +474,7 @@ public class frm_quartos extends javax.swing.JFrame {
         ativar();
         btn_salvar.setText("Salvar");
         acao="salvar";
-        btn_novo.enable(false);
+       
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
