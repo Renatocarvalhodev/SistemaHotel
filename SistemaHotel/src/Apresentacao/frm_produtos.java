@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author renat
  */
-public class frm_produtos extends javax.swing.JFrame {
+public class frm_produtos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frm_produtos
@@ -22,7 +22,7 @@ public class frm_produtos extends javax.swing.JFrame {
         initComponents();
         desativar();
         mostrar("null");
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
     }
     
     private String acao = "salvar";
@@ -119,7 +119,10 @@ public class frm_produtos extends javax.swing.JFrame {
         btn_sair = new javax.swing.JButton();
         lbl_registros = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
         setTitle("Cadastro de Produtos");
 
         jPanel1.setBackground(new java.awt.Color(224, 224, 224));
@@ -386,7 +389,7 @@ public class frm_produtos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );

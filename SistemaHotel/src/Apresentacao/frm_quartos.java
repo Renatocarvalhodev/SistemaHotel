@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author renat
  */
-public class frm_quartos extends javax.swing.JFrame {
+public class frm_quartos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frm_quarto
@@ -22,8 +22,7 @@ public class frm_quartos extends javax.swing.JFrame {
         initComponents();
         desativar();
         mostrar("null");
-        this.setLocationRelativeTo(null);
-        
+        //this.setLocationRelativeTo(null);        
     }
     
     private String acao = "salvar";
@@ -131,9 +130,12 @@ public class frm_quartos extends javax.swing.JFrame {
         btn_sair = new javax.swing.JButton();
         lbl_registros = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de Quartos");
         setBackground(new java.awt.Color(204, 204, 204));
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Cadastro de Quartos");
 
         jPanel1.setBackground(new java.awt.Color(224, 224, 224));
 

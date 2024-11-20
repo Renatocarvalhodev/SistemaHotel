@@ -94,7 +94,5 @@ public class Quartos {
 
     public void setTipo_quarto(String tipo_quarto) {
         this.tipo_quarto = tipo_quarto;
-    }
-    
-    
+    }    
 }

@@ -24,7 +24,5 @@ public class Clientes extends Usuario {
 
     public void setCodigo_cliente(String codigo_cliente) {
         this.codigo_cliente = codigo_cliente;
-    }
-    
-    
+    }    
 }
